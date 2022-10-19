@@ -1,0 +1,14 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active current"><a routerLink="/home">Home</a></li>
+                <li *ngIf="auth.isLoggedIn() && auth.GetUserRole()==='Admin'"  routerLinkActive="active current"><a routerLink="/admin">Admin</a></li>
+                <li *ngIf="!auth.isLoggedIn()" routerLinkActive="active current" ><a routerLink="/login">Login</a></li>
+                <li *ngIf="!auth.isLoggedIn()" routerLinkActive="active current" ><a routerLink="/signup">Sign Up</a></li>
+                <li *ngIf="auth.isLoggedIn()" routerLinkActive="active current"><a routerLink="/article">Articles</a></li>
+                <li *ngIf="auth.isLoggedIn()" routerLinkActive="active current"><a routerLink="/login" (click)="auth.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

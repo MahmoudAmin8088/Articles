@@ -1,0 +1,65 @@
+<div class="form-body">
+    <form [formGroup]="myForm" (ngSubmit)="CreateData()" >
+        <div class="form-group">
+            <label for="articleDetails">Article Details </label>
+            <input id="articleDetails" type="text" class="form-control" formControlName="articleDetails">
+            <div *ngIf="articleDetails?.touched && articleDetails?.invalid" class="alert alert-danger">
+                <div *ngIf="articleDetails?.hasError('required')" >Article Details Is Required </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="catigoryId"> Cataigory</label>
+            <select id="catigoryId" class="form-control" formControlName="catigoryId">
+                <option *ngFor="let catigory of catigorys" [value]="catigory.catigoryId">{{catigory.catigoryName}}</option>
+            </select>
+            <div *ngIf="catigoryId?.touched && catigoryId?.invalid" class="alert alert-danger">
+                <div *ngIf="catigoryId?.hasError('required')" >Catagory Is Required </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary"  [disabled]="myForm.invalid"  type="submit" style="margin-top:10px;margin-bottom: 10px;" >Save</button>
+        </div>
+
+
+    </form>
+</div>
+<div class="col-md-12" >
+    <div class="table-card">
+        <table class="table table-stripedd table-sm table-bordered">
+            <thead class="table-head">
+                <tr>
+                    <th>articleDetail</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                      </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let article of articles; let i = index">
+                    <td>{{article.articleDetails}}</td>
+                    <td>{{article.articleTime}}</td>
+                    <td>
+                      <!-- (click)="ModalEdit($event, item)" -->
+                    <button  class="btn btn-success btn-sm" (click)="edit(article)" >Edit
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <!-- (click)="openModalDelete(item)" -->
+                    <button  class="btn btn-danger btn-sm" (click)="delete(article)">Del
+                      <i class="fas fa-trash"></i>
+                    </button>
+                    <button  [routerLink]="['/comment',article.articleId]"  class="btn btn-success btn-sm"
+                     >Comment
+                      <i class="fas fa-edit"></i>
+                    </button>
+                   
+      
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center py-4 my-4" *ngIf="articles.length == 0">
+            <h4 class="py-4">NoDataFound</h4>
+         </div>
+    </div>
+</div>        
