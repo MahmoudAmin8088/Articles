@@ -2,11 +2,12 @@ import { NotFoundError } from './../common/not-found-error';
 import { BadInput } from './../common/bad-input';
 import { CommentService } from './../services/comment.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
 import { AppError } from 'app/common/app-error';
 import { Comments } from 'app/comment';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-comment',
@@ -14,17 +15,14 @@ import { Comments } from 'app/comment';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-  articleId:any;
   comments:Comments[]=[];
   myForm!:FormGroup;
   
 
-  constructor(private route:ActivatedRoute,public ComService:CommentService,private fb:FormBuilder,public authService: AuthService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any,public dialogRef:MatDialogRef<CommentComponent>,private route:ActivatedRoute,public ComService:CommentService,private fb:FormBuilder,public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(param=>{
-      this.articleId= param.get('articleId');
-     });
+   
    this.GetCommentOfArticle();
    this.GForm();
   }
@@ -39,7 +37,7 @@ export class CommentComponent implements OnInit {
     });
   }
   GetCommentOfArticle(){
-    this.ComService.GetArticleComments(this.articleId).subscribe(res=>{
+    this.ComService.GetArticleComments(this.data.articleId).subscribe(res=>{
       this.comments=res;
     });
   }
@@ -48,7 +46,7 @@ export class CommentComponent implements OnInit {
   Create(){
     debugger
     this.myForm.controls['userId'].setValue(this.authService.currentUser.userId);
-    this.myForm.controls['articleId'].setValue(this.articleId);
+    this.myForm.controls['articleId'].setValue(this.data.articleId);
 
     this.ComService.Create(this.myForm.value).subscribe(res=>{
       this.myForm.reset();

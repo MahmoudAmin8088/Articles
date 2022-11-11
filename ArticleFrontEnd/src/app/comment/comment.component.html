@@ -1,7 +1,9 @@
+<h2 mat-dialog-title>Comment.....</h2>
+<mat-dialog-content class="mat-typography">
 <div class="col-md-12" >
     <div class="table-card">
         <table class="table table-stripedd table-sm table-bordered">
-            <thead class="table-head">
+            <thead class="thead-light">
                 <tr>
                     <th>comments</th>
                     <th>Date</th>
@@ -22,12 +24,6 @@
                     <button  class="btn btn-danger btn-sm" (click)="delete(comment)">Del
                       <i class="fas fa-trash"></i>
                     </button>
-                    <!-- <button  [routerLink]="['/comment',comment.commentId]"  class="btn btn-success btn-sm"
-                     >Comment
-                      <i class="fas fa-edit"></i>
-                    </button> -->
-                   
-      
                   </td>
                 </tr>
             </tbody>
@@ -47,11 +43,11 @@
                 <div *ngIf="commentDetails?.hasError('required')" >Comment Is Required </div>
             </div>
         </div>
-
         <div class="form-group">
             <button class="btn btn-primary"  [disabled]="myForm.invalid"  type="submit" style="margin-top:10px;margin-bottom: 10px;" >Comment</button>
+            <button  class="btn btn-primary" style="margin-left: 5px;" mat-button mat-dialog-close >Cancel</button>
         </div>
-
-
     </form>
+
 </div>
+</mat-dialog-content>

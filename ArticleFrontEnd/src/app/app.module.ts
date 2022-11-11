@@ -18,8 +18,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ArticleComponent } from './article/article.component';
 import { CommentComponent } from './comment/comment.component';
 import { AuthService } from './services/auth.service';
-
+import {MatDialogModule} from '@angular/material/dialog'
 import { AdminAuthGuard} from './services/admin-auth-guard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -41,7 +42,9 @@ import { AdminAuthGuard} from './services/admin-auth-guard.service';
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
 
   ],
   providers: [

@@ -48,10 +48,10 @@
                     <button  class="btn btn-danger btn-sm" (click)="delete(article)">Del
                       <i class="fas fa-trash"></i>
                     </button>
-                    <button  [routerLink]="['/comment',article.articleId]"  class="btn btn-success btn-sm"
-                     >Comment
-                      <i class="fas fa-edit"></i>
-                    </button>
+                    <button mat-button class="btn btn-success btn-sm" (click)="AddComment(article.articleId)"
+                    >Comment
+                     <i class="fas fa-edit"></i>
+                   </button>
                    
       
                   </td>

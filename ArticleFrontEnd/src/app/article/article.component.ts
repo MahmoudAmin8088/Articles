@@ -1,3 +1,4 @@
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommentService } from './../services/comment.service';
 import { CatagoryService } from './../services/catagory.service';
 import { NotFoundError } from './../common/not-found-error';
@@ -9,6 +10,7 @@ import { ArticleService } from './../services/article.service';
 import { Component, OnInit, Output } from '@angular/core';
 import { Article } from 'app/article';
 import { identifierName } from '@angular/compiler';
+import { CommentComponent } from 'app/comment/comment.component';
 
 @Component({
   selector: 'app-article',
@@ -22,7 +24,8 @@ export class ArticleComponent implements OnInit {
   catigorys:any;
   @Output()article:any;
 
-  constructor(private service:ArticleService,private CommentService:CommentService,public authService:AuthService,private fb:FormBuilder,public catService:CatagoryService) { }
+  constructor(private service:ArticleService,private CommentService:CommentService,public authService:AuthService,private fb:FormBuilder,
+    public catService:CatagoryService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.GForm();
@@ -112,6 +115,16 @@ export class ArticleComponent implements OnInit {
   delete(article:any){
     let id = article.articleId;
     this.Delete(id);
+  }
+
+  AddComment(articleId:string){
+    debugger
+    const config = new MatDialogConfig();
+    config.autoFocus= true;
+    config.disableClose=true;
+    config.width="50%";
+    config.data={articleId};
+    const dialogRef = this.dialog.open(CommentComponent,config);
   }
 
   get getName(){

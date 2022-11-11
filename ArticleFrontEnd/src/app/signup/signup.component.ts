@@ -23,8 +23,8 @@ export class SignupComponent implements OnInit {
 
   GForm(){
    this.myForm=this.fb.group({
-    firstName:['',Validators.required],
-    lastName: ['',Validators.required],
+      firstName:['',Validators.required],
+      lastName: ['',Validators.required],
       userName:['',Validators.required],
       email:['',Validators.required],
       password:['',Validators.required]
@@ -40,21 +40,21 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  get firstName(){
-    return this.myForm.get('firstName');
-   }
-   get lastName(){
-    return this.myForm.get('lastName');
-   }
-   get userName(){
-    return this.myForm.get('userName');
-   }
-   get email(){
-    return this.myForm.get('email');
-   }
-   get password(){
-    return this.myForm.get('password');
-   }
+    get firstName(){
+      return this.myForm.get('firstName');
+    }
+    get lastName(){
+      return this.myForm.get('lastName');
+    }
+    get userName(){
+      return this.myForm.get('userName');
+    }
+    get email(){
+      return this.myForm.get('email');
+    }
+    get password(){
+      return this.myForm.get('password');
+    }
    
 
 }
